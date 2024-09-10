@@ -19,6 +19,7 @@
       :items="collection"
       :search="search"
       :loading="loading"
+      @click:row="openOrder"
     >
       <template v-slot:loading>
         <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
@@ -30,6 +31,7 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import {orderController} from "@/shared/utils/api/orderController/orderController";
+import router from "@/app/router";
 
 const loading = ref(true);
 const search = ref();
@@ -58,7 +60,9 @@ const headers = [
 
 const collection = ref([]);
 
-
+function openOrder(event, row) {
+  router.push(`/orders/${row.item.id}`);
+}
 </script>
 <style scoped>
 

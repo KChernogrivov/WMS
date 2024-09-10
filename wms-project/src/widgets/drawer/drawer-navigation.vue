@@ -21,8 +21,8 @@
 
     <v-divider></v-divider>
 
-    <v-list v-model:opened="open">
-      <v-list-group value="Orders">
+    <v-list v-model:opened="open" open-strategy="single">
+      <v-list-group prepend-icon="mdi-account-circle" value="Orders">
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
