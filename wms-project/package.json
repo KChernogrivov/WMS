@@ -1,6 +1,6 @@
 {
-  "name": "wms-project",
-  "version": "0.0.0",
+  "name": "getway-wms",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

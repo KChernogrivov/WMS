@@ -1,19 +1,15 @@
-import {AuthLayout, BaseLayout} from "@/shared/ui/layouts";
-import OrdersPage from "@/pages/order/orders-page.vue";
-import LoginPage from "@/pages/login/login-page.vue";
-import WarehousePage from "@/pages/warehouse/warehouse-page.vue";
-import CreateWarehouse from "@/pages/warehouse/create-warehouse.vue";
+import {AuthLayout} from "@/shared/ui/layouts";
 
 export const routes = [
   {
     path: '/',
     name: 'home',
-    component: OrdersPage,
+    redirect: '/orders',
   },
   {
     path: '/login',
     name: 'login',
-    component: LoginPage,
+    component: () => import('@/pages/login/login-page.vue'),
     meta: {
       layout: AuthLayout,
     }
@@ -21,13 +17,81 @@ export const routes = [
   {
     path: '/warehouses',
     name: 'warehouses',
-    component: WarehousePage,
-    children: [
-      {
-        path: '/warehouses/create',
-        name: 'create-warehouse',
-        component: CreateWarehouse,
-      }
-    ]
-  }
+    component: () => import('@/pages/warehouse/warehouses-page.vue'),
+  },
+  {
+    path: '/warehouses/create',
+    name: 'create-warehouse',
+    component: () => import('@/pages/warehouse/create-warehouse.vue'),
+  },
+  {
+    path: '/warehouses/:id',
+    name: 'warehouse',
+    component: () => import('@/pages/warehouse/warehouse-page.vue'),
+  },
+  {
+    path: '/orders',
+    name: 'orders',
+    component: () => import('@/pages/order/orders-page.vue'),
+  },
+  {
+    path: '/orders/create-inbound',
+    name: 'create-inbound',
+    component: () => import('@/pages/order/create-inbound.vue'),
+  },
+  {
+    path: '/orders/create-outbound',
+    name: 'create-outbound',
+    component: () => import('@/pages/order/create-outbound.vue'),
+  },
+  {
+    path: '/orders/create-internal',
+    name: 'create-internal',
+    component: () => import('@/pages/order/create-internal.vue'),
+  },
+  {
+    path: '/orders/:id',
+    name: 'order',
+    component: () => import('@/pages/order/order-page.vue'),
+  },
+  {
+    path: '/products',
+    name: 'products',
+    component: () => import('@/pages/product/products-page.vue'),
+  },
+  {
+    path: '/products/create',
+    name: 'create-product',
+    component: () => import('@/pages/product/create-product.vue'),
+  },
+  {
+    path: '/products/:id',
+    name: 'product',
+    component: () => import('@/pages/warehouse/warehouse-page.vue'),
+  },
+  {
+    path: '/users',
+    name: 'users',
+    component: () => import('@/pages/user/users-page.vue'),
+  },
+  {
+    path: '/users/create',
+    name: 'create-user',
+    component: () => import('@/pages/user/create-user.vue'),
+  },
+  {
+    path: '/companies',
+    name: 'companies',
+    component: () => import('@/pages/company/companies-page.vue'),
+  },
+  {
+    path: '/companies/create',
+    name: 'create-company',
+    component: () => import('@/pages/company/create-company.vue'),
+  },
+  {
+    path: '/companies/:id',
+    name: 'company',
+    component: () => import('@/pages/company/company-page.vue'),
+  },
 ]

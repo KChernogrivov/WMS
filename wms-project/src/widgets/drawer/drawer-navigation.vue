@@ -22,8 +22,6 @@
     <v-divider></v-divider>
 
     <v-list v-model:opened="open">
-      <v-list-item prepend-icon="mdi-home" title="Home"></v-list-item>
-
       <v-list-group value="Orders">
         <template v-slot:activator="{ props }">
           <v-list-item
@@ -35,21 +33,25 @@
 
         <v-list-item
           link
+          to="/orders"
           title="List of orders"
         ></v-list-item>
 
         <v-list-item
           link
+          to="/orders/create-inbound"
           title="Create inbound"
         ></v-list-item>
 
         <v-list-item
           link
+          to="/orders/create-outbound"
           title="Create outbound"
         ></v-list-item>
 
         <v-list-item
           link
+          to="/orders/create-internal"
           title="Create internal"
         ></v-list-item>
       </v-list-group>
@@ -71,7 +73,7 @@
 
         <v-list-item
           link
-          to="/warehouses/create"
+          to="/warehouses/create-warehouse"
           title="Create warehouse"
         ></v-list-item>
 
