@@ -26,7 +26,7 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="mdi-truck-delivery"
             title="Orders"
           ></v-list-item>
         </template>
@@ -60,7 +60,7 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="mdi-warehouse"
             title="Warehouses"
           ></v-list-item>
         </template>
@@ -83,7 +83,7 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="mdi-tag-multiple"
             title="Products"
           ></v-list-item>
         </template>
@@ -105,7 +105,7 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="mdi-briefcase"
             title="Companies"
           ></v-list-item>
         </template>
@@ -127,7 +127,7 @@
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-account-circle"
+            prepend-icon="mdi-account-group"
             title="Users"
           ></v-list-item>
         </template>
