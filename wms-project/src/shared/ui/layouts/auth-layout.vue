@@ -1,14 +1,16 @@
-<script setup>
-
-import MainContent from "@/widgets/main-content/main-content.vue";
-</script>
-
 <template>
-  <v-layout class="rounded rounded-md" style="min-height: 100vh">
+  <v-layout class="rounded rounded-md auth-layout" style="min-height: 100vh">
     <main-content></main-content>
   </v-layout>
 </template>
 
-<style scoped>
+<script setup>
+import MainContent from "@/widgets/main-content/main-content.vue";
+</script>
 
+<style scoped>
+.auth-layout {
+  background-image: url("../../images/auth-background.jpg");
+  background-size: cover;
+}
 </style>
