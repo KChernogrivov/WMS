@@ -57,6 +57,6 @@ export default createVuetify({
     //   myCustomLightTheme,
     // },
 
-    defaultTheme: 'light'
+    defaultTheme: localStorage.getItem('theme') || 'light',
   },
 })

@@ -15,6 +15,7 @@
     </template>
 
     <v-data-table
+      hover
       :headers="headers"
       :items="collection"
       :search="search"

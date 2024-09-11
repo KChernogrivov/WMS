@@ -1,5 +1,5 @@
 <template>
-  <v-layout class="rounded rounded-md auth-layout" style="min-height: 100vh">
+  <v-layout class="auth-layout d-flex justify-center align-center" style="min-height: 100vh">
     <main-content></main-content>
   </v-layout>
 </template>

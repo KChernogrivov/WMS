@@ -1,13 +1,14 @@
-import axios from "axios";
+import {useApi} from "@/shared/utils/api/useApi";
+
 
 export const orderController = {
   async getOrderById(companyId) {
-    return await axios.get(`/orders/${companyId}`);
+    return await useApi.get(`/orders/${companyId}`);
   },
   async createOrder(orderData) {
-    return await axios.post(`/orders/create`, orderData);
+    return await useApi.post(`/orders/create`, orderData);
   },
   async getOrders() {
-    return await axios.get(`http://ec2-16-170-140-7.eu-north-1.compute.amazonaws.com/api/ordersss`);
+    return await useApi.get(`http://ec2-16-170-140-7.eu-north-1.compute.amazonaws.com/api/ordersss`);
   },
 }

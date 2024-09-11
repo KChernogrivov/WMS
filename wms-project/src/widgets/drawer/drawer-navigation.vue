@@ -9,13 +9,6 @@
         subtitle="sandra_a88@gmailcom"
         title="Sandra Adams"
       >
-        <template v-slot:append>
-          <v-btn
-            icon="mdi-menu-down"
-            size="small"
-            variant="text"
-          ></v-btn>
-        </template>
       </v-list-item>
     </v-list>
 
