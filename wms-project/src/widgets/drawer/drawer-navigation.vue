@@ -1,6 +1,8 @@
 <template>
   <v-navigation-drawer
+    :close-delay="200"
     expand-on-hover
+    :mobile-breakpoint="'md'"
     rail
   >
     <v-list>
@@ -15,11 +17,11 @@
     <v-divider></v-divider>
 
     <v-list v-model:opened="open" open-strategy="single">
-      <v-list-group prepend-icon="mdi-account-circle" value="Orders">
+
+      <v-list-group prepend-icon="mdi-truck-delivery" value="Orders">
         <template v-slot:activator="{ props }">
           <v-list-item
             v-bind="props"
-            prepend-icon="mdi-truck-delivery"
             title="Orders"
           ></v-list-item>
         </template>
@@ -27,24 +29,29 @@
         <v-list-item
           link
           to="/orders"
+          prepend-icon="mdi-format-list-bulleted"
           title="List of orders"
-        ></v-list-item>
+        >
+        </v-list-item>
 
         <v-list-item
           link
           to="/orders/create-inbound"
+          prepend-icon="mdi-download"
           title="Create inbound"
         ></v-list-item>
 
         <v-list-item
           link
           to="/orders/create-outbound"
+          prepend-icon="mdi-upload"
           title="Create outbound"
         ></v-list-item>
 
         <v-list-item
           link
           to="/orders/create-internal"
+          prepend-icon="mdi-autorenew"
           title="Create internal"
         ></v-list-item>
       </v-list-group>
@@ -61,12 +68,14 @@
         <v-list-item
           link
           to="/warehouses"
+          prepend-icon="mdi-format-list-bulleted"
           title="List of warehouses"
         ></v-list-item>
 
         <v-list-item
           link
           to="/warehouses/create-warehouse"
+          prepend-icon="mdi-plus"
           title="Create warehouse"
         ></v-list-item>
 
@@ -84,12 +93,14 @@
         <v-list-item
           link
           to="/products"
+          prepend-icon="mdi-format-list-bulleted"
           title="List of products"
         ></v-list-item>
 
         <v-list-item
           link
           to="/products/create"
+          prepend-icon="mdi-plus"
           title="Create product"
         ></v-list-item>
       </v-list-group>
@@ -106,12 +117,14 @@
         <v-list-item
           link
           to="/companies"
+          prepend-icon="mdi-format-list-bulleted"
           title="List of companies"
         ></v-list-item>
 
         <v-list-item
           link
           to="/companies/create"
+          prepend-icon="mdi-plus"
           title="Create company"
         ></v-list-item>
       </v-list-group>
@@ -128,12 +141,14 @@
         <v-list-item
           link
           to="/users"
+          prepend-icon="mdi-format-list-bulleted"
           title="List of users"
         ></v-list-item>
 
         <v-list-item
           link
           to="/users/create"
+          prepend-icon="mdi-plus"
           title="Create user"
         ></v-list-item>
       </v-list-group>

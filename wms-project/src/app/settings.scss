@@ -1,10 +1,3 @@
-/**
- * src/styles/settings.scss
- *
- * Configures SASS variables and Vuetify overwrites
- */
-
-// https://vuetifyjs.com/features/sass-variables/`
-// @use 'vuetify/settings' with (
-//   $color-pack: false
-// );
+.v-navigation-drawer__content .v-list-group__items .v-list-item {
+  padding-inline: 16px !important;
+}
