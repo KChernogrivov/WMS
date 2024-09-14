@@ -42,6 +42,7 @@ import {useField, useForm} from 'vee-validate'
 import {authController} from "@/shared/utils/api/authController/authController";
 import {ref} from "vue";
 import router from "@/app/router";
+import {useApi} from "@/shared/utils/api/useApi";
 
 const {handleSubmit, meta, setErrors} = useForm({
   validationSchema: {
@@ -65,6 +66,7 @@ const onSubmit = handleSubmit(async values => {
     isLoading.value = true;
     const response = await authController.login(values);
     localStorage.setItem('token', response.data.token_access);
+    useApi.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token_access;
     router.push('/orders');
   } catch (error) {
     setErrors({

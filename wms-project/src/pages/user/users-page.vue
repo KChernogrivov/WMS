@@ -1,6 +1,6 @@
 <template>
   <v-card
-    title="Orders list"
+    title="Users list"
     flat
   >
     <template v-slot:text>
@@ -31,39 +31,49 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import {orderController} from "@/shared/utils/api/orderController/orderController";
-import router from "@/app/router";
+import {userController} from "@/shared/utils/api/userController/userController";
 
 const loading = ref(true);
+const collection = ref([]);
 const search = ref();
 
 onMounted(async () => {
   try {
-    const response = await orderController.getOrders();
-    collection.value = response.data.orders;
+    const response = await userController.getUsers();
+    collection.value = response.data;
+    loading.value = false;
   } catch (error) {
     console.log(error)
-  } finally {
-    loading.value = false;
   }
 })
 
 const headers = [
   {
-    title: 'Reference',
+    title: 'Name',
     align: 'start',
-    sortable: false,
-    key: 'reference',
+    key: 'name',
   },
-  {title: 'Description', key: 'description', align: 'end'},
-  {title: 'Status', key: 'status.name', align: 'end'},
+  {
+    title: 'Surname',
+    align: 'start',
+    key: 'surname',
+  },
+  {
+    title: 'Phone',
+    align: 'start',
+    key: 'phone',
+  },
+  {
+    title: 'Company',
+    align: 'start',
+    key: 'vendor.name',
+  },
+  {
+    title: 'email',
+    align: 'start',
+    key: 'email',
+  },
 ];
-
-const collection = ref([]);
-
-function openOrder(event, row) {
-  router.push(`/orders/${row.item.id}`);
-}
 </script>
 <style scoped>
 

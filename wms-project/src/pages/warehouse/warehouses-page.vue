@@ -1,6 +1,6 @@
 <template>
   <v-card
-    title="Orders list"
+    title="Warehouses list"
     flat
   >
     <template v-slot:text>
@@ -20,7 +20,7 @@
       :items="collection"
       :search="search"
       :loading="loading"
-      @click:row="openOrder"
+      @click:row="openWarehouse"
     >
       <template v-slot:loading>
         <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
@@ -31,16 +31,17 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import {orderController} from "@/shared/utils/api/orderController/orderController";
 import router from "@/app/router";
+import {warehouseController} from "@/shared/utils/api/warehouseController/warehouseController";
 
 const loading = ref(true);
 const search = ref();
+const collection = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await orderController.getOrders();
-    collection.value = response.data.orders;
+    const response = await warehouseController.getWarehouses();
+    collection.value = response.data.warehouses;
   } catch (error) {
     console.log(error)
   } finally {
@@ -50,19 +51,34 @@ onMounted(async () => {
 
 const headers = [
   {
-    title: 'Reference',
+    title: 'Name',
     align: 'start',
-    sortable: false,
-    key: 'reference',
+    key: 'name',
   },
-  {title: 'Description', key: 'description', align: 'end'},
-  {title: 'Status', key: 'status.name', align: 'end'},
+  {
+    title: 'Company',
+    align: 'start',
+    key: 'vendor.name',
+  },
+  {
+    title: 'Country',
+    align: 'start',
+    key: 'country',
+  },
+  {
+    title: 'City',
+    align: 'start',
+    key: 'city',
+  },
+  {
+    title: 'Email',
+    align: 'start',
+    key: 'email',
+  },
 ];
 
-const collection = ref([]);
-
-function openOrder(event, row) {
-  router.push(`/orders/${row.item.id}`);
+function openWarehouse(event, row) {
+  router.push(`/warehouses/${row.item.id}`);
 }
 </script>
 <style scoped>

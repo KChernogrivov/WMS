@@ -97,7 +97,7 @@ export const routes = [
   {
     path: '/products/:id',
     name: 'product',
-    component: () => import('@/pages/warehouse/warehouse-page.vue'),
+    component: () => import('@/pages/product/product-page.vue'),
     meta: {
       layout: BaseLayout,
     }

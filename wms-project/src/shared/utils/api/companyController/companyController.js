@@ -1,13 +1,16 @@
-import axios from "axios";
+import {useApi} from "@/shared/utils/api/useApi";
 
 export const companyController = {
   async getCompanyById(companyId) {
-    return await axios.get(`/companies/${companyId}`);
+    return await useApi.get(`/vendors/${companyId}`);
   },
   async createCompany(companyData) {
-    return await axios.post(`/companies/create`, companyData);
+    return await useApi.post(`/vendors/create`, companyData);
+  },
+  async getWarehousesCompany(companyId) {
+    return await useApi.get(`/vendors/${companyId}/warehouses`);
   },
   async getCompanies() {
-    return await axios.get(`/companies`);
+    return await useApi.get(`/vendors`);
   },
 }

@@ -3,41 +3,40 @@
     flat
   >
     <template v-slot:title>
-      <p class="text-h4">Order detail</p>
+      <v-skeleton-loader type="subtitle" :loading="loading">
+        <p class="text-h4">Order {{ orderData?.reference }}</p>
+      </v-skeleton-loader>
     </template>
+
     <template v-slot:text>
       <v-skeleton-loader type="subtitle" :loading="loading">
-        {{ orderData }}
+        <div class="d-flex flex-column gap-2">
+          <p class="text-h6">Status: {{ orderData.status.name }}</p>
+          <p class="text-h6">Type: {{ orderData.type.name }}</p>
+          <p class="text-h6">PickUp Location: {{ }}</p>
+          <p class="text-h6">Consignee: {{  }}</p>
+          <p class="text-h6">Description: {{ orderData.description ?? '-' }}</p>
+          <p class="text-h6">AWB: {{ orderData.AWB ?? '-' }}</p>
+          <p class="text-h6">Invoice: {{ orderData.invoice ?? '-' }}</p>
+          <p class="text-h6">POD: {{ orderData.POD ?? '-' }}</p>
+          <p class="text-h6">ETA: {{ orderData.ETA ?? '-' }}</p>
+          <p class="text-h6">Created by: {{ orderData.created_by.name }} {{ orderData.created_by.surname }}</p>
+        </div>
       </v-skeleton-loader>
     </template>
 
     <v-data-table
-      :group-by="groupBy"
       :headers="headers"
       :items="collection"
       :loading="loading"
       item-value="name"
     >
-      <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
-        <tr>
-          <td :colspan="columns.length">
-            <VBtn
-              :icon="isGroupOpen(item) ? '$expand' : '$next'"
-              size="small"
-              variant="text"
-              @click="toggleGroup(item)"
-            ></VBtn>
-            {{ item.value ? 'Contains gluten' : 'Gluten free' }}
-          </td>
-        </tr>
-      </template>
-
       <template v-slot:loading>
         <v-skeleton-loader type="table-row@5"></v-skeleton-loader>
       </template>
     </v-data-table>
 
-    <div class="mt-4">
+    <div v-if="loading" class="mt-4">
       <v-skeleton-loader type="card"></v-skeleton-loader>
     </div>
 
@@ -60,6 +59,7 @@ import {useRoute} from "vue-router";
 
 const loading = ref(true);
 const orderData = ref(null);
+const collection = ref([]);
 const snackbar = ref(false);
 const route = useRoute()
 
@@ -68,28 +68,17 @@ onMounted(async () => {
     loading.value = true;
     const response = await orderController.getOrderById(route.params.id);
     orderData.value = response.data;
+    collection.value = response.data.products;
     loading.value = false;
   } catch (error) {
     snackbar.value = true;
   }
 })
 
-const groupBy = [
-  {
-    key: 'model',
-  },
-];
-
 const headers = [
-  {title: 'Model', align: 'center', key: 'model'},
-  {title: 'HS code', key: 'hs-code', align: 'center'},
-  {title: 'Serial', align: 'center', key: 'serials'},
-  {title: 'Location', align: 'center', key: 'location'},
-  {title: 'Amount in stock', key: 'amount-in-stock', align: 'center'},
-  {title: 'Status', align: 'center', key: 'status'},
+  {title: 'Model', align: 'left', key: 'model_name'},
+  {title: 'Quantity', align: 'left', key: 'quantity'},
 ];
-
-const collection = ref([]);
 </script>
 
 <style scoped>

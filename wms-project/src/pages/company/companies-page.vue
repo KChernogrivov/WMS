@@ -1,6 +1,6 @@
 <template>
   <v-card
-    title="Orders list"
+    title="Companies list"
     flat
   >
     <template v-slot:text>
@@ -31,16 +31,18 @@
 
 <script setup>
 import {onMounted, ref} from "vue";
-import {orderController} from "@/shared/utils/api/orderController/orderController";
 import router from "@/app/router";
+import {companyController} from "@/shared/utils/api/companyController/companyController";
 
 const loading = ref(true);
 const search = ref();
+const collection = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await orderController.getOrders();
-    collection.value = response.data.orders;
+    const response = await companyController.getCompanies();
+    collection.value = response.data;
+    console.log(collection.value);
   } catch (error) {
     console.log(error)
   } finally {
@@ -50,19 +52,34 @@ onMounted(async () => {
 
 const headers = [
   {
-    title: 'Reference',
+    title: 'Name',
     align: 'start',
-    sortable: false,
-    key: 'reference',
+    key: 'name',
   },
-  {title: 'Description', key: 'description', align: 'end'},
-  {title: 'Status', key: 'status.name', align: 'end'},
+  {
+    title: 'Country',
+    align: 'start',
+    key: 'country',
+  },
+  {
+    title: 'City',
+    align: 'start',
+    key: 'city',
+  },
+  {
+    title: 'Email',
+    align: 'start',
+    key: 'email',
+  },
+  {
+    title: 'Phone',
+    align: 'start',
+    key: 'phone',
+  },
 ];
 
-const collection = ref([]);
-
 function openOrder(event, row) {
-  router.push(`/orders/${row.item.id}`);
+  router.push(`/companies/${row.item.id}`);
 }
 </script>
 <style scoped>
