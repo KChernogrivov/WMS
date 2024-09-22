@@ -20,21 +20,31 @@
       </v-skeleton-loader>
     </template>
 
-    <v-data-table
-      hover
-      :headers="headers"
-      :items="collection"
-      :loading="loading"
-      @click:row="openWarehouse"
-    >
-      <template v-slot:loading>
-        <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+    <v-card>
+      <template v-slot:text>
+        <v-text-field
+          v-model="search"
+          label="Search"
+          prepend-inner-icon="mdi-magnify"
+          variant="outlined"
+          hide-details
+          single-line
+        ></v-text-field>
       </template>
-    </v-data-table>
 
-<!--    <div v-if="loading" class="mt-4">-->
-<!--      <v-skeleton-loader type="card"></v-skeleton-loader>-->
-<!--    </div>-->
+      <v-data-table
+        hover
+        :headers="headers"
+        :search="search"
+        :items="collection"
+        :loading="loading"
+        @click:row="openWarehouse"
+      >
+        <template v-slot:loading>
+          <v-skeleton-loader type="table-row@10"></v-skeleton-loader>
+        </template>
+      </v-data-table>
+    </v-card>
 
     <v-snackbar
       timer="2000"
@@ -56,6 +66,7 @@ import router from "@/app/router";
 
 const loading = ref(true);
 const company = ref(null);
+const search = ref();
 const collection = ref([]);
 const snackbar = ref(false);
 const route = useRoute()
@@ -102,11 +113,6 @@ const headers = [
     title: 'Name',
     align: 'start',
     key: 'name',
-  },
-  {
-    title: 'Company',
-    align: 'start',
-    key: 'vendor.name',
   },
   {
     title: 'Country',

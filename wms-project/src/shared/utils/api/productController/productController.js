@@ -5,6 +5,9 @@ export const productController = {
   async getProductById(productId) {
     return await useApi.get(`/products/${productId}`);
   },
+  async getProductsInWarehouse(productId) {
+    return await useApi.get(`/products/${productId}/warehouses`);
+  },
   async createProduct(productData) {
     return await useApi.post(`/products/create`, productData);
   },

@@ -36,6 +36,7 @@ import router from "@/app/router";
 
 const loading = ref(true);
 const search = ref();
+const collection = ref([]);
 
 onMounted(async () => {
   try {
@@ -58,8 +59,6 @@ const headers = [
   {title: 'Description', key: 'description', align: 'end'},
   {title: 'Status', key: 'status.name', align: 'end'},
 ];
-
-const collection = ref([]);
 
 function openOrder(event, row) {
   router.push(`/orders/${row.item.id}`);
