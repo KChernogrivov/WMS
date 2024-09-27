@@ -1,11 +1,9 @@
 <template>
-  <div class="orders-page">
-    orders
-  </div>
+  <outbound-form></outbound-form>
 </template>
 
 <script setup>
-
+import OutboundForm from "@/features/outboundOrder/ui/outbound-form.vue";
 </script>
 
 <style scoped>

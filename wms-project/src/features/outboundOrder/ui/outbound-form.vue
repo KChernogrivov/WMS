@@ -4,7 +4,7 @@
   >
     <template v-slot:title>
       <v-skeleton-loader>
-        <p class="text-h4">Create inbound order</p>
+        <p class="text-h4">Create outbound order</p>
       </v-skeleton-loader>
     </template>
 
@@ -24,7 +24,15 @@
       <v-divider><p class="text-h6">Sender</p></v-divider>
 
       <v-row class="mt-2">
-        <v-col cols="12" md="6">
+        <v-col cols="12" md="3">
+        <v-select
+          v-model="senderType.value.value"
+          label="Sender type"
+          :items="['Warehouse', 'Manually']"
+        ></v-select>
+        </v-col>
+
+        <v-col cols="12" md="3">
           <v-text-field
             v-model="recipientCompany.value.value"
             :error-messages="recipientCompany.errorMessage.value"
@@ -257,6 +265,7 @@
 import {onMounted, ref} from "vue";
 import {warehouseController} from "@/shared/utils/api/warehouseController/warehouseController";
 import {useField, useFieldArray, useForm} from "vee-validate";
+import {array, object, string} from 'yup';
 import {orderController} from "@/shared/utils/api/orderController/orderController";
 
 const warehouses = ref([]);
@@ -266,31 +275,46 @@ onMounted(async () => {
   try {
     const response = await warehouseController.getWarehouses();
     warehouses.value = response.data.warehouses;
+    loading.value = false;
   } catch (error) {
     console.log(error)
-  } finally {
-    loading.value = false;
   }
 })
 
 const isLoading = ref(false);
 
 const {handleSubmit, meta, setErrors} = useForm({
-  validationSchema: {
-    'recipient.id': value => !!value,
-    'sender.company': value => !!value,
-    'sender.contact_person': value => !!value,
-    'sender.phone': value => !!value,
-    'sender.county': value => !!value,
-    'sender.city': value => !!value,
-    'sender.street': value => !!value,
-    'sender.house': value => !!value,
-    'delivery.order_reference': value => !!value,
-    'delivery.ETA': value => !!value,
-    'delivery.description': value => !!value,
-    'delivery.tracking': value => !!value,
-    'delivery.AWB': value => !!value,
-  },
+  validationSchema: object({
+    recipient: object({
+      id: string().required(),
+    }),
+
+    sender: object({
+      company: string().required(),
+      contact_person: string().required(),
+      phone: string().required(),
+      county: string().required(),
+      city: string().required(),
+      street: string().required(),
+      house: string().required(),
+    }),
+
+    delivery: object({
+      order_reference: string().required(),
+      ETA: string().required(),
+      description: string().required(),
+      tracking: string().required(),
+      AWB: string().required(),
+    }),
+
+    products: array().of(
+      object().shape({
+        id: string(),
+        quantity: string(),
+        serials: string(),
+      })
+    )
+  }),
   initialValues: {
     products: [
       {
@@ -304,6 +328,7 @@ const {handleSubmit, meta, setErrors} = useForm({
 
 const consignee = useField('recipient.id')
 
+const senderType = useField('sender.type');
 const recipientCompany = useField('sender.company');
 const contactPerson = useField('sender.contact_person');
 const phone = useField('sender.phone');
